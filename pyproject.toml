@@ -1,0 +1,35 @@
+[project]
+name = "asu-mccord-hall-indoor-ar-navigation-mvp"
+version = "0.1.0"
+description = "Project utilities for the ASU McCord Hall Indoor AR Navigation MVP."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "black>=24.0.0",
+    "mypy>=1.8.0",
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
