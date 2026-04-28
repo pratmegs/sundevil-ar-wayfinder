@@ -1,0 +1,33 @@
+[project]
+name = "sundevil-ar-waypoint"
+version = "0.1.0"
+description = "MVP scaffold utilities for SunDevil AR Waypoint"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "black>=24.0.0",
+  "mypy>=1.8.0",
+  "pytest>=8.0.0",
+  "ruff>=0.5.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_return_any = true
+warn_unused_configs = true
