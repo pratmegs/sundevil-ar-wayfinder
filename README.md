@@ -1,76 +1,224 @@
-# ASU McCord Hall Indoor AR Navigation MVP
+# 📍 SunDevil AR Wayfinder
 
-This repository is a clean scaffold for an MVP that will help users navigate inside ASU McCord Hall using browser-based camera OCR and an AR-style directional overlay.
+A browser-based indoor navigation system for ASU buildings using OCR-based room identification, graph routing, and AR-style visual guidance.
 
-The full application is not implemented yet. This scaffold establishes the frontend, Python tooling, documentation, test layout, and CI structure needed for the next development phase.
+The project explores how a mobile camera can be used to estimate a user's indoor location without GPS by recognizing room plaques and mapping them to a building navigation graph.
 
-## Project Goal
+---
 
-The MVP will use a phone or laptop browser camera to read room plaques with OCR, map the detected room number to an indoor navigation graph node, calculate a route to a selected destination, and display simple AR-style guidance over the camera view.
+## Problem
+
+GPS works well outdoors but becomes unreliable inside large buildings.
+
+Indoor navigation often requires expensive infrastructure such as:
+
+- Bluetooth beacons
+- dedicated positioning hardware
+- pre-installed markers
+- specialized mobile applications
+
+SunDevil AR Wayfinder explores a lightweight alternative using existing room signage.
+
+---
+
+## How It Works
+
+```text
+Phone Camera
+     ↓
+Room Plaque Detection
+     ↓
+OCR Room Number Recognition
+     ↓
+Room → Graph Node Mapping
+     ↓
+Shortest Path Calculation
+     ↓
+Navigation Instructions
+     ↓
+AR-Style Direction Overlay
+```
+
+---
+
+## Current Features
+
+### Camera-Based Navigation Interface
+
+The application provides a mobile-first camera interface designed for indoor navigation.
+
+### OCR Room Identification
+
+Room plaques can be analyzed using browser-based OCR to identify the user's approximate location.
+
+### Indoor Waypoint Mapping
+
+Recognized room numbers are mapped to predefined navigation nodes.
+
+### Graph-Based Routing
+
+The building layout is represented as a navigation graph.
+
+Routes between locations can then be calculated using graph traversal and shortest-path logic.
+
+### AR-Style Guidance
+
+Directional instructions are displayed over the camera interface to simulate an AR navigation experience.
+
+---
 
 ## Architecture
 
-- `frontend/`: React + Vite browser app.
-- `frontend/src/`: Placeholder React source structure for components, hooks, utilities, and app data.
-- `tools/`: Python utilities for map validation, OCR notes, documentation helpers, and future preprocessing.
-- `data/raw/`: Original field data and source map files.
-- `data/processed/`: Cleaned map graph data and processed assets.
-- `data/test_images/`: Field test images for OCR experiments.
-- `docs/`: Architecture notes, demo plan, and field testing checklist.
-- `tests/`: Python tests for utility code.
-- `scripts/`: Project helper scripts added in future work.
+```text
+React Frontend
+      │
+      ├── Camera Interface
+      │
+      ├── OCR Pipeline
+      │
+      ├── Room Detection
+      │
+      ├── Navigation Graph
+      │
+      └── AR Guidance UI
+      │
+      ▼
+Processed Building Map Data
+```
 
-## Why uv Is Used
+Python utilities are also included for:
 
-`uv` provides fast, reproducible Python environment and dependency management. It is used for project utilities, documentation scripts, future data preprocessing, and testing helpers.
+- map validation
+- preprocessing
+- testing
+- future OCR experiments
 
-Common Python commands:
+---
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Tesseract.js
+
+### Navigation / Vision
+
+- OCR
+- graph algorithms
+- indoor waypoint mapping
+- visual localization concepts
+
+### Python Tooling
+
+- Python
+- uv
+- pytest
+- Ruff
+- Black
+- MyPy
+
+---
+
+## Project Structure
+
+```text
+sundevil-ar-wayfinder/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── data/
+│   │   ├── utils/
+│   │   └── App.jsx
+│   └── package.json
+├── tools/
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── test_images/
+├── docs/
+├── tests/
+├── .github/
+├── README.md
+└── LICENSE
+```
+
+---
+
+## Running the Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The development server will start using Vite.
+
+---
+
+## Python Development Setup
+
+Install `uv` and dependencies:
 
 ```bash
 uv sync
+```
+
+Run tests:
+
+```bash
 uv run pytest
+```
+
+Run linting:
+
+```bash
 uv run ruff check .
-uv run black .
-uv run mypy tools
 ```
 
-## Why npm Is Still Needed
+---
 
-The frontend is a browser application built with React and Vite. JavaScript dependencies such as `react`, `react-dom`, `vite`, and `tesseract.js` are managed with npm inside `frontend/`.
+## Current Status
 
-Common frontend commands:
+The project currently includes:
 
-```bash
-cd frontend
-npm install
-npm run dev
-npm run build
-npm run preview
-```
+- mobile navigation interface
+- AR-style UI components
+- OCR-based waypoint logic
+- room-to-navigation-node mapping
+- project testing and validation structure
 
-## Development Setup
+The system is still an MVP and is being expanded toward more robust real-world indoor localization.
 
-1. Install Python 3.11 or newer.
-2. Install `uv`.
-3. Sync Python dependencies:
+---
 
-```bash
-uv sync
-```
+## Current Limitations
 
-4. Install frontend dependencies:
+- OCR quality depends on lighting and plaque visibility
+- indoor localization currently relies primarily on detected room signage
+- the building graph must be manually constructed
+- navigation does not currently perform full visual-inertial localization
+- real-world navigation testing is still limited
 
-```bash
-cd frontend
-npm install
-```
+---
 
-5. Start the frontend development server:
+## Future Work
 
-```bash
-npm run dev
-```
+- improve OCR robustness
+- measure OCR localization accuracy
+- add orientation estimation
+- support multiple ASU buildings
+- evaluate route success in real-world field tests
+- investigate visual landmarks in addition to room plaques
+- add more advanced AR positioning
 
-## Current Scope
+---
 
-This repository currently contains only the project scaffold. It intentionally does not include QR code support, fake plaque support, or manual location fallback controls.
+## Author
+
+Pratiksha Theodore
